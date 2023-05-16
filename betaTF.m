@@ -1,0 +1,16 @@
+function [numD, ...
+          denD, ...
+          numC, ...
+          denC]= betaTF(beta, ...
+          m, ...
+          ts)
+      
+s = tf('s');
+SYS_C = 0;
+for K=1:m
+SYS_C = SYS_C + 1/(s+beta^2*K^2);
+end
+SYS_D = c2d(SYS_C,ts);
+[numD,denD]=tfdata(SYS_D,'v');
+[numC,denC]=tfdata(SYS_C,'v');
+end
